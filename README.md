@@ -1,0 +1,100 @@
+# Formal Methods for DeFi Developers
+
+## Introduction
+This repository contains a course sequence for training developers in the use & development of formal methods and formal tools.
+
+Later material in the curriculum will more greatly emphasize blockchain applications & DeFi, while earlier material is more agnostic (though still contains blockchain-specific material in certain parts).
+
+The curriculum assumes basic familiarity with logic and general computer science concepts such as propositional logic, basic set theory, algorithms. The first set of material does cover fundamentals, but the fundamentals build upon the concepts listed above and will not review them. See `external_resources/fundamentals.md` for a recommended list of resources about the above material if you'd like a refresher.
+
+
+
+## Philosophy
+This course is designed with a general goal of providing a comprehensive resource to onboard blockchain developers to formal methods research and development. The blockchain industry is still quite new. It naturally has attracted people from all sorts of diverse technical backgrounds. Simultaneously, blockchain & DeFi are considered financially critical software since it is used to store billions of dollars worth of value. 
+
+There is *a lot* of important research yet to be done on effectively integrating safety assurance methodologies & technologies into blockchain developer workflows. We believe this industry will benefit not only from increased adepthood in *using* formal tools, but understanding their theoretical foundations as well. Given the industry's age, there is less maturity in developer tools in general, as well as formal tools more specifically (let alone the integration between the two). Further, the primary products in the industry (distributed protocols as well as dapps), run in open, permissionless, adversarial environments. 
+
+Managing complexity in software is a difficult issue as it is. Managing complexity in blockchain & DeFi software is especially difficult and failing to do so is especially detrimental. This leaves all participants in a precarious position: caught between the rapid pace of innovation, the imperative for a fair global financial system, and the need to pursue the latter while keeping pace with the former... all while preserving the strict safety guarantees necessary when building financially critical software.
+
+# Course Sequence & Outcomes
+
+## Course 1A: Mathematical Foundations 
+
+**Description**: This course explains the fundamental mathematical concepts and conventions that developers will need to effectively consume the rest of the course material as well as research on formal methods more generally. This course includes material on the following topics:
+
+- Set theory
+- First-order logic 
+- Mathematical modeling
+- Algebraic & Equational reasoning
+- Deductive & Inductive proof methods
+
+
+**Outcomes**: Developers who complete this course should be able to: 
+- Recognize popular formal tools and describe their tradeoffs. 
+- Describe the formal methods landscape.
+- Explain core challenges in formal methods in software development and the trade-offs formal tools must make
+- Utilize set theory and logic to perform proofs about fundamental mathematical sets such as the natural numbers.
+- Utilize set theory and logic to perform proofs about fundamental data structures such as lists, trees, and graphs.
+
+
+## Course 1B: Formal Methods Foundations
+
+
+**Description**: While the foundations course 1A laid the mathematical foundation, 1B provides a more complete map of the formal methods landscape. The material in 1B is designed to build familiarity with the concepts and terminology in the industry (breadth) as well as provide more focused insight on select important topics that are usually involved in most formal tools today. Finally, it provides a first introduction to the primary formal tool we will be using for more advanced tasks: the K Framework.
+
+Topics include:
+- A tour of formal tools & methods
+
+- SAT & SMT Solving
+- Hoare logic
+- Model checking theories & algorithms
+- Introduction to rewrite & reachability logic
+- Introduction to the K Framework
+
+
+**Outcomes**: Developers who complete this course will be able to:
+- Prove simple properties about programs using hoare logic
+- Partially prove properties about programs with loops
+- Understand how model checking and (semi)-automated theorem proving works
+- Utilize SAT and SMT solvers to solve constraint satisfaction problems
+- Compare and contrast different theories of logic 
+- Define a formal grammar and formal operational semantics for a simple programming language (using K Framework)
+- Use K for modeling simple state transition systems
+
+
+## Course 2: Approaches to Modeling & Verification
+**Description**: This course introduces developers to important and widely used methods in formal tooling. It distinguishes between automated, semi-automated, and manual techniques and discusses properties to keep in mind when evaluating different techniques for different problems.
+
+Topics include:
+- Types of analysis techniques
+- Model checking
+- Algorithms used as decision procedures in formal tools
+- Relevance of Completeness and Soundness
+- Fuzzing & Symbolic execution
+- Abstract Interpretation
+- Deductive Verification
+
+
+**Outcomes**: Developers who complete this course will be able to:
+- Understand the algorithms involved in automated, semi-automated, and manual formal techniques
+- Utilize static analyzers to find bugs in code
+- Use symbolic execution to verify programs
+- Define a formal semantics of a non trivial language and prove properties about that language using the K Framework
+- Use higher level modeling to break a real-world cryptographic protocol
+- Comfortably learn how to use an interactive theorem prover
+
+
+
+## Course 3: Applied Formal Methods
+
+**Description**: This course builds upon the practical modeling skills in course 2 by applying formal specification and verification techniques to higher fidelity systems. Developers will construct various formal models of DeFi primitives subsystems within real DeFi protocols. This course also emphasizes formal methods workflows. This course marks a transition in the curriculum where we stop comparing and contrasting different tools and use the K framework in greater depth.
+
+**Outcomes**: Developers who complete this course will be able to:
+- Build non-trivial state transition models in K
+- Formally specify non-trivial properties in K
+- Review real-world applications of the K framework
+- Read & build off of R&D from academia and industry to create something truly useful
+
+## Course 4: Safety & Assurance in Critical Software
+
+**Description**: Survey of important standards and standards-bodies in the safety critical software space; distinguish between safety & security; threat modeling; advanced testing; simulation; workflows for security & safety engineering
