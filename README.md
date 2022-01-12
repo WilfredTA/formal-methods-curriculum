@@ -37,30 +37,6 @@ Managing complexity in software is a difficult issue as it is. Managing complexi
 - Utilize set theory and logic to perform proofs about fundamental data structures such as lists, trees, and graphs.
 
 
-## Course 1B: Formal Methods Foundations
-
-
-**Description**: While the foundations course 1A laid the mathematical foundation, 1B provides a more complete map of the formal methods landscape. The material in 1B is designed to build familiarity with the concepts and terminology in the industry (breadth) as well as provide more focused insight on select important topics that are usually involved in most formal tools today. Finally, it provides a first introduction to the primary formal tool we will be using for more advanced tasks: the K Framework.
-
-Topics include:
-- A tour of formal tools & methods
-
-- SAT & SMT Solving
-- Hoare logic
-- Model checking theories & algorithms
-- Introduction to rewrite & reachability logic
-- Introduction to the K Framework
-
-
-**Outcomes**: Developers who complete this course will be able to:
-- Prove simple properties about programs using hoare logic
-- Partially prove properties about programs with loops
-- Understand how model checking and (semi)-automated theorem proving works
-- Utilize SAT and SMT solvers to solve constraint satisfaction problems
-- Compare and contrast different theories of logic 
-- Define a formal grammar and formal operational semantics for a simple programming language (using K Framework)
-- Use K for modeling simple state transition systems
-
 
 ## Course 2: Approaches to Modeling & Verification
 **Description**: This course introduces developers to important and widely used methods in formal tooling. It distinguishes between automated, semi-automated, and manual techniques and discusses properties to keep in mind when evaluating different techniques for different problems.
@@ -85,7 +61,33 @@ Topics include:
 
 
 
-## Course 3: Applied Formal Methods
+## Course 3: Formal Methods Fundamental Algorithms & Theory
+
+
+**Description**: While the foundations course 1A laid the mathematical foundation, 1B provides a more complete map of the formal methods landscape. The material in 1B is designed to build familiarity with the concepts and terminology in the industry (breadth) as well as provide more focused insight on select important topics that are usually involved in most formal tools today. Finally, it provides a first introduction to the primary formal tool we will be using for more advanced tasks: the K Framework.
+
+Topics include:
+- A tour of formal tools & methods
+
+- SAT & SMT Solving
+- Hoare logic
+- Model checking theories & algorithms
+- Introduction to rewrite & reachability logic
+- Introduction to the K Framework
+
+
+**Outcomes**: Developers who complete this course will be able to:
+- Prove simple properties about programs using hoare logic
+- Partially prove properties about programs with loops
+- Understand how model checking and (semi)-automated theorem proving works
+- Utilize SAT and SMT solvers to solve constraint satisfaction problems
+- Compare and contrast different theories of logic 
+- Define a formal grammar and formal operational semantics for a simple programming language (using K Framework)
+- Use K for modeling simple state transition systems
+
+
+
+## Course 4: Applied Formal Methods
 
 **Description**: This course builds upon the practical modeling skills in course 2 by applying formal specification and verification techniques to higher fidelity systems. Developers will construct various formal models of DeFi primitives subsystems within real DeFi protocols. This course also emphasizes formal methods workflows. This course marks a transition in the curriculum where we stop comparing and contrasting different tools and use the K framework in greater depth.
 
@@ -94,7 +96,3 @@ Topics include:
 - Formally specify non-trivial properties in K
 - Review real-world applications of the K framework
 - Read & build off of R&D from academia and industry to create something truly useful
-
-## Course 4: Safety & Assurance in Critical Software
-
-**Description**: Survey of important standards and standards-bodies in the safety critical software space; distinguish between safety & security; threat modeling; advanced testing; simulation; workflows for security & safety engineering
