@@ -18,7 +18,7 @@ Managing complexity in software is a difficult issue as it is. Managing complexi
 
 # Course Sequence & Outcomes
 
-## Course 1A: Mathematical Foundations 
+## Course 1: Mathematical Foundations 
 
 **Description**: This course explains the fundamental mathematical concepts and conventions that developers will need to effectively consume the rest of the course material as well as research on formal methods more generally. This course includes material on the following topics:
 
@@ -39,7 +39,7 @@ Managing complexity in software is a difficult issue as it is. Managing complexi
 
 
 ## Course 2: Approaches to Modeling & Verification
-**Description**: This course introduces developers to important and widely used methods in formal tooling. It distinguishes between automated, semi-automated, and manual techniques and discusses properties to keep in mind when evaluating different techniques for different problems.
+**Description**: This course introduces developers to important and widely used methods in formal tooling. It distinguishes between automated, semi-automated, and manual techniques and discusses properties to keep in mind when evaluating different techniques for different problems. It provides broad exposure to popular tools with the goal of developing a high level "map" of the territory.
 
 Topics include:
 - Types of analysis techniques
@@ -55,16 +55,15 @@ Topics include:
 - Understand the algorithms involved in automated, semi-automated, and manual formal techniques
 - Utilize static analyzers to find bugs in code
 - Use symbolic execution to verify programs
-- Define a formal semantics of a non trivial language and prove properties about that language using the K Framework
-- Use higher level modeling to break a real-world cryptographic protocol
-- Comfortably learn how to use an interactive theorem prover
+- Define a formal grammar and formal operational semantics for a simple programming language (using K Framework)
+- Use K for modeling simple state transition systems
 
 
 
 ## Course 3: Formal Methods Fundamental Algorithms & Theory
 
 
-**Description**: While the foundations course 1A laid the mathematical foundation, 1B provides a more complete map of the formal methods landscape. The material in 1B is designed to build familiarity with the concepts and terminology in the industry (breadth) as well as provide more focused insight on select important topics that are usually involved in most formal tools today. Finally, it provides a first introduction to the primary formal tool we will be using for more advanced tasks: the K Framework.
+**Description**: While the foundations course 1A laid the mathematical foundation and course 2 provided a tour of useful tools, this course dives deeper into fundamental algorithms involved in the tools we use for formal modeling, specification and verification.
 
 Topics include:
 - A tour of formal tools & methods
@@ -82,9 +81,8 @@ Topics include:
 - Understand how model checking and (semi)-automated theorem proving works
 - Utilize SAT and SMT solvers to solve constraint satisfaction problems
 - Compare and contrast different theories of logic 
-- Define a formal grammar and formal operational semantics for a simple programming language (using K Framework)
-- Use K for modeling simple state transition systems
-
+- Define a formal semantics of a non trivial language and prove properties about that language using the K Framework
+- Use higher level modeling to break a real-world cryptographic protocol
 
 
 ## Course 4: Applied Formal Methods
