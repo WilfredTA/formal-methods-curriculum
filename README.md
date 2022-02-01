@@ -8,7 +8,6 @@ Later material in the curriculum will more greatly emphasize blockchain applicat
 The curriculum assumes basic familiarity with logic and general computer science concepts such as propositional logic, basic set theory, algorithms. The first set of material does cover fundamentals, but the fundamentals build upon the concepts listed above and will not review them. See `external_resources/fundamentals.md` for a recommended list of resources about the above material if you'd like a refresher.
 
 
-
 ## Philosophy
 This course is designed with a general goal of providing a comprehensive resource to onboard blockchain developers to formal methods research and development. The blockchain industry is still quite new. It naturally has attracted people from all sorts of diverse technical backgrounds. Simultaneously, blockchain & DeFi are considered financially critical software since it is used to store billions of dollars worth of value. 
 
@@ -94,3 +93,15 @@ Topics include:
 - Formally specify non-trivial properties in K
 - Review real-world applications of the K framework
 - Read & build off of R&D from academia and industry to create something truly useful
+
+# Using the Included Docker Container
+
+Prerequisite: having Docker installed within a Unix-like environment.
+
+To prepare Docker image:
+`make image`
+
+To run it:
+`make run`
+
+The `/mnt` directory inside the container corresponds to the mnt/ directory of this repository.
