@@ -1,0 +1,426 @@
+module LogicLib {
+    declare A, A1, A2, A3, B, C, C1, C2, C3, D, E, F, G, H, I, J: Boolean
+
+    define two-cases :=
+        method (cond-1 cond-2)
+            let { M := method (p q)
+                         (!cases conclude (p | ~ p)
+                                    (!ex-middle p)
+                            (p ==> q)
+                            (~ p ==> q)
+                         )
+
+                }
+
+        match [cond-1 cond-2] {
+            [(p ==> q) ((~ p) ==> q)] => (!M p q)
+            | [((~ p) ==> q) (p ==> q)] => (!M p q)
+        }
+
+
+
+
+    # Example Proof
+    # Goal: (~ B ==> A ==> ~ E)
+    assert prem1 := (A & B | (A ==> C))
+    assert prem2 := (C <==> ~ E)
+        assume (~ B)
+                assume A
+                    conclude (~E)
+                    (!cases prem1
+                        assume (A & B)
+                                (!from-complements (~E) B (~B))  
+                        assume AC := (A ==> C)
+                            let {
+                                C-E := (!left-iff prem2);
+                                C := (!mp AC A)
+                            }
+                            (!mp C-E C)
+                    )
+    
+     
+
+    # Contrapositive is simply the construction of a new conditional
+    # via assumption and application of modus-tollens
+     define (contra-pos premise) :=
+        match premise {
+            (p ==> q) => assume -q := (~ q)
+                            conclude (~ p)
+                                (!mt premise -q)
+        }
+
+   
+    # Commutative Laws
+    define (and-comm premise) :=
+        match premise {
+            (_ & _) => (!both (!right-and premise) (!left-and premise))
+        }
+
+    define (or-comm premise) := {
+        match premise {
+            (p | q) => (!cases premise
+                               assume p
+                                  (!right-either q p)
+                                assume q
+                                  (!left-either q p)
+            )
+        }
+    }
+
+    define (iff-comm premise) :=
+        match premise {
+            (_ <==> _) => (!equiv (!right-iff premise) (!left-iff premise)) 
+        }
+
+    define (comm premise) := 
+        match premise {
+            (_ & _) => (!and-comm premise)
+            | (_ | _) => (!or-comm premise)
+            | (_ <==> _) => (!iff-comm premise)
+        }
+    
+
+    # Double Negation laws
+    define (idn premise) :=
+        (!by-contradiction (~~ premise)
+            assume -premise := (~premise)
+            (!absurd -premise premise)
+        )
+
+    define (bdn premise) := 
+        match premise {
+            (~ (~ _)) => (!dn premise)
+            | _ => (!idn premise)
+        }
+
+    define (from-false goal) := 
+        (!by-contradiction goal
+            assume (~ goal)
+                (!claim false)
+        )
+
+    # Given q and not-q, prove p
+    define (from-complements p q1 q2) :=
+        let { M := method (goal q -q)
+                    let {_ := (!absurd q -q)}
+                    (!from-false goal)
+            }
+            match [q1 q2] {
+                [q (~ q)] =>(!M p q1 q2)
+              | [(~q) q] => (!M p q2 q1)
+            }
+
+    # Given A implies B and B implies C, conclude A implies C
+    define (hsl premise-1 premise-2) := 
+        match [premise-1 premise-2] {
+            [(p1 ==> p2) (p2 ==> p3)] =>
+                assume p1
+                    conclude p3
+                    (!mp premise-2
+                            conclude p2
+                                (!mp premise-1 p1)
+                    
+                    )
+        }
+
+    define (dsl premise-1 complement) := 
+        match [premise-1 complement] {
+            [(p | q) r] => 
+                check {
+                    (complements? p r) => 
+                        (!cases premise-1
+                                    assume p
+                                        (!from-complements q p r)
+                                    assume q
+                                        (!claim q)
+                        )
+                    | else => (!cases premise-1
+                                      assume p
+                                        (!claim p)
+                                      assume q
+                                        (!from-complements p q r)
+
+                    )
+                } 
+        }
+
+    define (complements? p q) :=
+        (|| (q equal? complement p) (p equal? complement q))
+
+
+    # From ~ (p & q) derive (~p | ~q)
+    define (dm-1 premise) :=
+        match premise {
+            (~ (p & q)) => conclude goal := (~p | ~q)
+                            (!two-cases 
+                                assume p
+                                   let {-q := (!by-contradiction (~ q)
+                                                    assume q
+                                                        (!absurd (!both p q) premise)
+                                              )}
+                                    (!right-either (~p) -q)
+                                assume -p := (~ p)
+                                    (!left-either -p (~q))
+                            
+                            )
+        }
+
+    # From (p | q) derive ~ (~p & ~q)
+    define (dm-2 premise) := 
+        match premise {
+            (p | q) => 
+                let {['p 'q] := [(complement p) (complement q)];
+                     goal := (~ ('p & 'q))}
+                     (!by-contradiction goal
+                        assume -goal := (~ goal)
+                        let {_ := (!dn -goal)}
+                        (!cases premise 
+                            assume p
+                                (!from-complements false p 'p)
+                            assume q
+                                (!from-complements false q 'q)
+                        )    
+                     )
+        }
+
+        # from-false, from-complements and two-cases seem similar...
+        # from-false allows you to prove something FROM a false statement
+        # from-complements proves any sentence from two complementary sentences (a sentence and its negation)
+        # two cases proves something from a DISJUNCTION of a sentence and its negation
+
+
+    # From ~ (p | q) derive (~p & ~q)
+    define (dm-3 premise) :=
+        match premise {
+            (~ (p | q)) => let { p' := (!by-contradiction (complement p)
+                                        assume p
+                                            (!absurd (!left-either p q) premise));
+                                 q' := (!by-contradiction (complement q)
+                                            assume q
+                                            (!absurd (!right-either p q) premise)
+                                        )            
+                                }
+                            (!both p' q')
+        }
+
+    # From p & q derive ~ (~p | ~q)
+    define (dm-4 premise) := 
+        match premise {
+            (p & q) => (!by-contradiction conclude goal := (~ (~p | ~q))
+                            assume -goal := (~ (~(~p | ~q)))
+                            let {-goal-simple := (!dn -goal)}
+                            (!cases -goal-simple
+                                assume (~p)
+                                    (!absurd (!left-and premise) ~p)
+                                assume (~q)
+                                    (!absurd (!right-and premise) ~q)
+                            
+                            )
+                                
+            
+                        )
+        }
+
+    define (demorgan premise) := 
+        match premise {
+            (~ (_ & _)) => (!dm-1 premise)
+          | (_ | _) => (!dm-2 premise)
+          | (~ (_ | _)) => (!dm-3 premise)
+          | (_ & _) => (!dm-4 premise)
+        }
+
+    # Distributivity: p & (q | r) = (p & q) | (p & r)
+    # p | (q & r) = (p | q) & (p | r)
+
+    define (cd-dist-1 premise) := 
+        match premise {
+            (p & (q | r)) => 
+                conclude ((p & q) | (p & r))
+                    let {_ := (!left-and premise)}
+                    (!cases ((q | r) by (!right-and premise))
+                        assume q
+                            (!left-either (!both p q) (p & r))
+                        assume r
+                            (!right-either (p & q) (!both p r))
+                    
+                    )
+        }
+
+        define (cd-dist-2 premise) := 
+            match premise {
+                ((p & q) | (p & r)) => 
+                    conclude (p & (q | r))
+                    (!cases premise 
+                        assume pq := (p & q)
+                            (!both (!left-and pq) (!left-either (!right-and pq) r))
+                        assume pr := (p & r)
+                            (!both (!left-and pr) (!right-either q (!left-and pr)))
+                    )
+            }
+
+        define (dc-dist-1 premise) :=
+            match premise {
+                (p | (q & r)) =>
+                    conclude ((p | q) & (p | r))
+                        (!cases premise 
+                            assume p
+                                (!both (!left-either p q) (!left-either p r))
+                            assume qr := (q & r)
+                                (!both (!right-either p (!left-and qr)) (!right-either p (!right-and qr)))
+                        )
+            }
+
+        define (dc-dist-2 premise) :=
+            match premise {
+                ((p | q) & (p | r)) =>
+                    conclude (p | (q & r))
+                    let {
+                        _ := (!left-and premise);
+                        _ := (!right-and premise)
+                    }
+                    (!cases (p | q)
+                        assume p
+                            (!left-either p (q & r))
+                        assume q
+                            (!cases (p | r)
+                                assume p
+                                    (!left-either p (q & r))
+                                assume r
+                                    (!right-either p (!both q r))
+                            )
+                    )
+            }
+
+        define (dist premise) := 
+            match premise {
+                  ((p | _) & (p | _)) => (!dc-dist-2 premise)
+                | (_ & (_ | _)) => (!cd-dist-1 premise)
+                | ((p & _) | (p & _)) => (!cd-dist-2 premise)
+                | (p | (q & r)) => (!dc-dist-1 premise)
+            }
+
+
+        define (cond-def-1 premise) :=
+            match premise {
+                (p ==> q) =>
+                    conclude goal := (~p | q)
+                        (!by-contradiction goal
+                            assume -goal := (~ goal)
+                            let { p1 := conclude (~ ~ p & ~ q )
+                                        (!dm' -goal);
+                                  p := (!dn (~ ~ p))
+                                }
+                                (!absurd (conclude q
+                                            (!mp premise p))
+                                         (~ q)
+                                )
+                        )
+            }
+
+        define (cond-def-2 premise) := match premise {
+            (p | q) => assume -p := (~ p)
+                        (!cases premise
+                            assume p
+                                (!from-complements q p -p)
+                            assume q
+                                (!claim q)
+                        )
+        }
+
+        define (cond-def premise) :=
+            match premise {
+                (_ ==> _) => (!cond-def-1 premise)
+               |(_ | _) => (!cond-def-2 premise)
+            }
+
+
+        # Higher order procedure that *produces* a method
+        define (make-cond-def-1 neg) :=
+            method (premise)
+                match premise {
+                    (p ==> q) => let { p' := (neg p); 
+                                       goal := (p' | q)
+                                 }
+                                 (!by-contradiction goal
+                                    assume -goal := (~ goal)
+                                    let {
+                                        _ := (!dm' -goal);
+                                        p := try { (!dn (~~p)) | (!claim p) }
+                                    }
+                                    (!absurd (!mp premise p) (~q))
+                                 )
+                }
+
+        define (make-cond-def-2 neg) :=
+            method (premise)
+                match premise {
+                    (p | q) => assume -p := (neg p)
+                                (!cases premise 
+                                    assume p
+                                        (!from-complements q p -p)
+                                    assume q
+                                        (!claim q)
+                                )
+                }
+
+        define (make-cond-def neg) :=
+            method (premise)
+                match premise {
+                (_ ==> _) => (!(make-cond-def-1 neg) premise)
+               | (_ | _) => (!(make-cond-def-2 neg) premise)
+            }
+
+        define cond-def := (make-cond-def complement)
+        define cond-def' := (make-cond-def not)
+
+
+        # Useful things noticed in this chapter:
+            #1. try {clause 1| clause2} blocks: can be used to take one path or the other
+            #2. (sentence by other-sentence) used as quick syntactic sugar over let {_:= other-sentence}
+        #                                                                                 (sentence)
+
+
+    # - (p ==> q) <==> (p & -q)
+    # p must be true, since if not-p is true, then the formula p ==> q is valid
+
+    define (neg-cond-ant premise) :=
+        match premise {
+            (~ (p ==> q)) => (!by-contradiction p
+                                assume -p := (~ p)
+                                    let {p==>q := assume p
+                                                    (!from-complements q p -p)}
+                                                    (!absurd p==>q premise)
+            
+                             )
+        }
+
+    define (neg-cond-con premise) :=
+        match premise {
+            (~ (p ==> q)) => (!by-contradiction (~ q)
+                                assume q
+                                let {p==>q := assume p (!claim q)}
+                                    (!absurd p==>q premise)
+                             )
+        }
+
+    define (neg-cond-conv premise) :=
+        match premise {
+            (p & (~ q)) => (!by-contradiction (~ (p ==> q))
+                                assume h := (p ==> q)
+                                (!absurd (!mp h (!left-and premise)) (!right-and premise))
+            
+                            )
+        }
+
+    define (neg-cond premise) :=
+        match premise {
+            (~ (_ ==> _)) => (!both (!neg-cond-ant premise) (!neg-cond-con premise))
+            | _ => (!neg-cond-conv premise)
+        }
+
+    define (bicond-def premise) :=
+        match premise {
+            (p <==> q) => (!both (!left-iff premise) (!right-iff premise))
+            | ((p ==> q) & (q ==> p)) => (!equiv (!left-and premise) (!right-and premise))
+        }
+}

@@ -1,0 +1,142 @@
+module GraphColoring {
+    load "sat.ath"
+
+    define test-dpll := SAT.test-dpll
+
+    define (make-graph edges) :=
+        let { N := (max* (join (map first edges) (map second edges)));
+              V := make-vector (1 plus N) [];
+              _ := ( map-proc 
+                        lambda (e)
+                            match e {
+                                [i j] => let {
+                                    N-i := vector-sub V i;
+                                    N-j := vector-sub V j;
+                                    _ := vector-set! V i (add j N-i)    
+                                }
+                                vector-set! V j (add i N-j)
+                            } 
+                        edges
+                   );
+                _ := ( map-proc 
+                          lambda (i)
+                              vector-set! V i (dedup vector-sub V i)
+                          (0 to N)
+                     )
+            }
+            [(1 plus N) V]
+
+    #define E := [[0 1] [0 2] [1 3]]
+    
+    #(make-graph E)
+
+    datatype Color := (color Int)
+
+    datatype Node := (node Int)
+
+    declare has: [Node Color] -> Boolean
+
+    define (coloring-constraints G K) :=
+        match G {
+            [N neighbors] => 
+                let {
+                    all-nodes := (0 to N minus 1);
+                    all-colors := (1 to K);
+                    at-least-one-color := 
+                        (map lambda (i)
+                                (or 
+                                    (map lambda (c) (node i has color c) all-colors) 
+                                )
+                             all-nodes
+                        );
+                    at-most-one-color :=
+                        (map lambda (i)
+                                (
+                                    and (
+                                            map lambda (c)
+                                                    (if 
+                                                        ( node i has color c)  
+                                                        ( and 
+                                                            ( map lambda (c') 
+                                                                    (~ node i has color c') 
+                                                                    
+                                                                (list-remove c all-colors)
+                                                            )  
+                                                        )
+                                                    )
+                                                all-colors
+                                            
+                                    )
+                                )
+                            all-nodes
+                        );
+                    distinct-colors := 
+                        (
+                            map lambda (i)
+                                    ( and 
+                                        ( map lambda (j)
+                                            ( and 
+                                                ( map lambda (c)
+                                                        (node i has color c ==> (~ node j has color c))
+                                                    all-colors
+                                                )
+                                            )
+                                          vector-sub neighbors i
+                                        ) 
+                                    )
+                                all-nodes
+                        )
+                }
+                (and (join at-least-one-color at-most-one-color distinct-colors))
+        }
+
+    define color-names := |{1 := "red", 2 := "blue", 3 := "green", 4 := "yellow"}|
+
+    define (show-results L color-names) :=
+        let { _ := (map-proc 
+                        lambda (p)
+                            match p {
+                                [((node i) has (color c)) true] =>
+                                    let {name := try { (color-names c)
+                                                        | (val->string color c)
+                                                     }
+                                    }
+                                (print "\nNode" i "-->" name)
+                                | _ => (print "nope")
+                            }
+                    L
+                   )                     
+            }
+            (print "\n")
+
+    define (graph-coloring edges K m) :=
+        let {
+            G := (make-graph edges);
+            constraints := (coloring-constraints G K);
+            res := (test-dpll constraints)
+        }
+        match res {
+            (some-list c) => (print "Satisfiable -- Can color graph with " K "colors\nInterpretation: "c)
+            | 'unsat => (print "Cannot color graph with " K "colors")
+        }
+        
+       
+ 
+
+    (graph-coloring [[0 1] [0 2]] 2 color-names)
+
+    define g_no_3_color := [
+            [0 4] [0 5] [0 1] [1 2] [1 5] [2 5] [2 3] [3 5] [3 4] [4 5]]
+
+   (graph-coloring g_no_3_color 3 color-names)
+
+    define g_3_color_no_2 := [
+        [0 1] [0 3] [0 4] [0 2]
+        [1 2] [1 3] [1 5]
+        [2 4] [2 5]
+        [3 4] [3 5]
+        [4 5] 
+    ]
+    (graph-coloring g_3_color_no_2 3 color-names)
+    (graph-coloring g_3_color_no_2 2 color-names)
+}
