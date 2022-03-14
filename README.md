@@ -15,6 +15,9 @@ There is *a lot* of important research yet to be done on effectively integrating
 
 Managing complexity in software is a difficult issue as it is. Managing complexity in blockchain & DeFi software is especially difficult and failing to do so is especially detrimental. This leaves all participants in a precarious position: caught between the rapid pace of innovation, the imperative for a fair global financial system, and the need to pursue the latter while keeping pace with the former... all while preserving the strict safety guarantees necessary when building financially critical software.
 
+## Curriculum duration
+Every course has a guideline of how long each topic should take to learn considering zero prior knowledge of the subject. These estimates wildly vary depending on how familiar the student is and can be seen as a manner of helping one schedule tasks.
+
 # Course Sequence & Outcomes
 
 ## Course 1: Mathematical Foundations 
@@ -64,19 +67,32 @@ Topics include:
 
 **Description**: While the foundations course 1A laid the mathematical foundation and course 2 provided a tour of useful tools, this course dives deeper into fundamental algorithms involved in the tools we use for formal modeling, specification and verification.
 
-Topics include:
-- A tour of formal tools & methods
+**Estimated time to completion**: 2 Months
 
-- SAT & SMT Solving
-- Hoare logic
-- Model checking theories & algorithms
-- Introduction to rewrite & reachability logic
-- Introduction to the K Framework
+Topics include:
+- 1. SAT & SMT Solving (2 weeks)
+    * A - SAT (0.5 weeks)
+    * B - SMT (0.5 weeks)
+    * C - Z3 SMT Solver (1 week)
+- 2. Hoare logic (2 weeks)
+    * A - Basics of Coq (1 weeks)
+    * B - Hoare Logic in Coq (1 week)
+- 3. Model checking theories & algorithms (1 week)
+    * A - TLA+ (1 week)
+    * B - ? 
+- 4. Tour of formal tools & methods for smart contract verification (1 week)
+    * PDF A - Quick summary of tools and categories (0.5 weeks)
+    * PDF B - In-depth paper going over tools       (0.5 weeks)
+- 5. Introduction to Reachability logic (1.5 weeks) 
+    * A - Matching Logic (1 week)
+    * B - Reachability Logic (0.5 weeks)
+- 6. Introduction to the K Framework (2 weeks)
+    * A - 
 
 
 **Outcomes**: Developers who complete this course will be able to:
-- Prove simple properties about programs using hoare logic
-- Partially prove properties about programs with loops
+- Prove simple properties about programs using hoare logic (in Coq?)
+- Partially prove properties about programs with loops 
 - Understand how model checking and (semi)-automated theorem proving works
 - Utilize SAT and SMT solvers to solve constraint satisfaction problems
 - Compare and contrast different theories of logic 
