@@ -19,4 +19,16 @@ http://minisat.se/MiniSat.html
 
 ## Tutorial
 
+First some theory on SAT:
 
+https://www.borealisai.com/en/blog/tutorial-9-sat-solvers-i-introduction-and-applications/
+
+Handbook of Satisfiability: Pirate?
+
+Now to encode some of the theory we learned and practice with MiniSat.
+
+First learn about the standard SAT encoding DNF format: https://people.sc.fsu.edu/~jburkardt/data/cnf/cnf.html.
+
+Then go through this list of solved exercises:
+
+- [ ] http://disi.unitn.it/~ldkr/ml2014/slides/minisat-exercizes.pdf
