@@ -1,0 +1,3 @@
+[submodule "tools/docker-env-athena"]
+	path = tools/docker-env-athena
+	url = https://github.com/WilfredTA/docker-env-athena

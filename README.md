@@ -94,14 +94,11 @@ Topics include:
 - Review real-world applications of the K framework
 - Read & build off of R&D from academia and industry to create something truly useful
 
-# Using the Included Docker Container
+# Getting started
+Clone this repository: `git clone --recurse-submodules git@github.com:WilfredTA/formal-methods-curriculum.git`
 
-Prerequisite: having Docker installed within a Unix-like environment.
+This course also relies on Docker for running various formal tools. Please ensure that Docker is installed on your machine. Find installation & setup instructions [here](https://docs.docker.com/engine/install/).
 
-To prepare Docker image:
-`make image`
 
-To run it:
-`make run`
-
-The `/mnt` directory inside the container corresponds to the mnt/ directory of this repository.
+## Organization
+Courses in this curriculum are located in the [courses](/courses) subdirectory. There are multiple software-based formal tools that accompany the various courses in this curriculum. These are located in the top-level [tools](/tools) directory.
