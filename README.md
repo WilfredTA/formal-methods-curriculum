@@ -95,10 +95,7 @@ Topics include:
 - Read & build off of R&D from academia and industry to create something truly useful
 
 # Getting started
-Clone this repository: `git clone --recurse-submodules git@github.com:WilfredTA/formal-methods-curriculum.git`
-
-This course also relies on Docker for running various formal tools. Please ensure that Docker is installed on your machine. Find installation & setup instructions [here](https://docs.docker.com/engine/install/).
-
+To get started, jump to [Course 1](courses/1_Foundations/).
 
 ## Organization
 Courses in this curriculum are located in the [courses](/courses) subdirectory. There are multiple software-based formal tools that accompany the various courses in this curriculum. These are located in the top-level [tools](/tools) directory.
