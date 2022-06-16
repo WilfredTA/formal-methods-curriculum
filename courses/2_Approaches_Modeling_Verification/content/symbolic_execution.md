@@ -56,9 +56,9 @@ In the initial state, the path constraints $\pi$ are *true* and input parameters
 and $\gamma$ respectively.
 Line 2 initializes variables `balance_in` and `balance_out`, which updates the symbolic store $\sigma$ by associating corresponding variables $bal\_in$
 and $bal\_out$ with a concrete value $100$.
-A conditional branch in line 4 forks further execution into two subtrees. When a *true* branch is taken, the constraint from line 4 (in symbolic terms) is added to the path conditions, which become $\pi = \alpha\geq\gamma\;\wedge\;\gamma\leq100$. In the next statement, the execution forks again depending on the order relation between symbolic variables $\beta$
+A conditional branch in line 4 forks further execution into two subtrees. When a *true* branch is taken, the constraint from line 4 (in symbolic terms) is added to the path conditions, which become $\pi = \alpha\geq\gamma\wedge\gamma\leq100$. In the next statement, the execution forks again depending on the order relation between symbolic variables $\beta$
 and $\alpha$, corresponding to `_appr` and `_in` variables, respectively.
-When a *false* branch is taken, the *negation* of a branch condition is added to path conditions—for example, if `(_appr >= _in)` does not hold, the path condition is updated as follows: $\pi = \alpha\geq\gamma\;\wedge\;\gamma\leq100\wedge\;\neg(\beta\geq\alpha).$
+When a *false* branch is taken, the *negation* of a branch condition is added to path conditions—for example, if `(_appr >= _in)` does not hold, the path condition is updated as follows: $\pi = \alpha\geq\gamma \wedge \gamma\leq100 \wedge \neg(\beta\geq\alpha).$
 Other lines of code perform assignments and arithmetic operations on smart contract variables and, therefore, update the symbolic state during evaluation.
 
 The goal of the symbolic execution here is to identify possible assertion violations. As discussed above, it manifests in a satisfiability of a logical formula constructed from as a conjunction of a path condition and a negation of the asserted expression that should always hold.
