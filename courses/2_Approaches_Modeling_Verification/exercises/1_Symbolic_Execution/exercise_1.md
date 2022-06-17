@@ -5,7 +5,7 @@ This exercise is based on [Manticore](https://github.com/trailofbits/manticore)â
 
 #### **Jupyter Notebook**
 
-The exercise is available as a Jupyter [notebok](https://colab.research.google.com/drive/17oyX0mL9TtpjPUQEYO4h_GwyW1A8V8r6?usp=sharing) in Google Collab.
+The exercise is available as a Jupyter [notebok](https://colab.research.google.com/drive/17oyX0mL9TtpjPUQEYO4h_GwyW1A8V8r6?usp=sharing) in Google Colab.
 
 #### **Local Installation**
 
