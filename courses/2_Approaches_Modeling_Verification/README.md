@@ -6,7 +6,7 @@ Topics include:
 - Algorithms used as decision procedures in formal tools
 - Relevance of Completeness and Soundness
 - Fuzzing
-- [Symbolic execution](/courses/2_Approaches_Modeling_Verification/content/symbolic_execution.md)
+- [Symbolic execution](https://github.com/WilfredTA/formal-methods-curriculum/blob/master/courses/2_Approaches_Modeling_Verification/content/1_Symbolic_Execution/symbolic_execution.md)
 
 - Abstract Interpretation
 - Deductive Verification

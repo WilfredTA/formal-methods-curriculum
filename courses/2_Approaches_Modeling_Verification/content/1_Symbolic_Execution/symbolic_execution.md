@@ -16,13 +16,13 @@ The transfer of tokens is imitated by changes in the `In` and `Out` balances of 
 For the transfer of `In` to succeed, the caller must *approve* spending of *at least* the `_in` amount of his `In` tokens. The number of *approved* tokens is captured by the `_appr` input parameter, therefore, this requirement translates to `_appr >= _in` (*line 5*). If it does not hold, the function execution should revert—however, this functionality is missing from the implementation (*line 9*).
 
 ```Solidity
- 1  function deposit(uint _in, uint _out, uint _appr) public {
+ 1  function deposit(uint _in, uint _out, uint _approved) public {
  2     uint balance_in = 100; uint balance_out = 100;
  3 
  4     if (_in >= _out && _out <= balance_out) {
  5         if (_approved >= _in) {
  6             balance_in += _in;
- 7             _appr -= _in;
+ 7             _approved -= _in;
  8         }
  9         // { else revert(); }
 10 
