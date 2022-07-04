@@ -6,7 +6,7 @@ The goal of this exercise is to familiarize yourself with the details of symboli
 
 #### **Jupyter Notebook**
 
-The Z3 tutorial and practical exercises are available as a Jupyter [notebook](https://drive.google.com/file/d/1X8E5d82dWT-bY4xcvGNtZnJPVGATnzN2/view?usp=sharing) in Google Colab.
+The Z3 tutorial and practical exercises are available as a Jupyter [notebook](https://colab.research.google.com/drive/1X8E5d82dWT-bY4xcvGNtZnJPVGATnzN2) in Google Colab.
 
 #### **Local Installation**
 
