@@ -84,6 +84,8 @@ The challenges include:
 
 Symbolic execution has been widely used to identify smart contract vulnerabilities, e.g., in [Oyente](https://github.com/enzymefinance/oyente), [Mythril](https://github.com/ConsenSys/mythril), [Osiris](https://github.com/christoftorres/Osiris), [HoneyBadger](https://github.com/christoftorres/HoneyBadger), [Maian](https://github.com/ivicanikolicsg/MAIAN), [teEther](https://github.com/nescio007/teether).
 
+Other tools include [hevm](https://github.com/dapphub/dapptools/tree/master/src/hevm), which uses symbolic execution to identify assertion violations, and [KEVM](https://jellopaper.org/)—an executable formal specification of EVM bytecode in $\mathbb{K}$ framework that facilitates symbolic execution of smart contracts.
+
 Property-based symbolic execution is supported by [Manticore](https://github.com/trailofbits/manticore).
 
 ## References
