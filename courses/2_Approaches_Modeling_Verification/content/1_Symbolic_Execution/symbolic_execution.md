@@ -54,8 +54,8 @@ Fig. 2. Symbolic execution tree of <font style="font-family:'Courier New'">depos
 
 In the initial state, the path constraints $\pi$ are *true* and input parameters `_in`, `_appr`, and `_out` and are assigned symbolic (i.e., arbitary) values $\alpha, \beta$,
 and $\gamma$ respectively.
-Line 2 initializes variables `balance_in` and `balance_out`, which updates the symbolic store $\sigma$ by associating corresponding variables $bal\_in$
-and $bal\_out$ with a concrete value $100$.
+Line 2 initializes variables `balance_in` and `balance_out`, which updates the symbolic store $\sigma$ by associating corresponding variables $bal\textunderscore in$
+and $bal\textunderscore out$ with a concrete value $100$.
 A conditional branch in line 4 forks further execution into two subtrees. When a *true* branch is taken, the constraint from line 4 (in symbolic terms) is added to the path conditions, which become $\pi = \alpha\geq\gamma\wedge\gamma\leq100$.
 In the next statement, the execution forks again depending on the order relation between symbolic variables $\beta$
 and $\alpha$, corresponding to `_appr` and `_in` variables, respectively.
@@ -68,7 +68,7 @@ After unrolling all execution traces of our example smart contract, we can concl
 ## Installation
 
 Exercise 1 involves the usage of [Manticore](https://github.com/trailofbits/manticore/tree/master/manticore)—a symbolic execution framework developed in Python by Trail of Bits.
-An Exercise 2 utilizes [Z3](https://github.com/Z3Prover/z3) and its Python API as an off-the-shelf SMT-solver.
+Exercise 2 utilizes [Z3](https://github.com/Z3Prover/z3) and its Python API as an off-the-shelf SMT-solver.
 
 ## Challenges in Symbolic Execution
 
